@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "natlas"
+version = "0.2.0"
+description = "Sovereign AI Agent Runtime, Evaluation Harness & Developer Toolkit for N-ATLAS (Nigeria's Multilingual LLM)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "NCAIR", email = "info@ncair.gov.ng" }
+]
+dependencies = [
+    "pydantic>=2.0.0",
+    "requests>=2.31.0",
+    "httpx>=0.25.0",
+    "click>=8.1.7",
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "python-multipart>=0.0.7",
+]
+
+[project.optional-dependencies]
+transformers = [
+    "transformers>=4.38.0",
+    "torch>=2.0.0",
+    "librosa>=0.10.0",
+    "soundfile>=0.12.1"
+]
+server = [
+    "fastapi>=0.100.0",
+    "uvicorn>=0.23.0",
+    "sse-starlette>=1.6.5"
+]
+all = [
+    "transformers>=4.38.0",
+    "torch>=2.0.0",
+    "librosa>=0.10.0",
+    "soundfile>=0.12.1",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.23.0",
+    "sse-starlette>=1.6.5"
+]
+
+[project.scripts]
+natlas = "natlas.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["natlas"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
